@@ -1,69 +1,120 @@
 # fjmr.github.io
-// ---------------------------------------------------------------------------
-// This example code was used to successfully communicate with 15 ultrasonic sensors. You can adjust
-// the number of sensors in your project by changing SONAR_NUM and the number of NewPing objects in the
-// "sonar" array. You also need to change the pins for each sensor for the NewPing objects. Each sensor
-// is pinged at 33ms intervals. So, one cycle of all sensors takes 495ms (33 * 15 = 495ms). The results
-// are sent to the "oneSensorCycle" function which currently just displays the distance data. Your project
-// would normally process the sensor results in this function (for example, decide if a robot needs to
-// turn and call the turn function). Keep in mind this example is event-driven. Your complete sketch needs
-// to be written so there's no "delay" commands and the loop() cycles at faster than a 33ms rate. If other
-// processes take longer than 33ms, you'll need to increase PING_INTERVAL so it doesn't get behind.
-// ---------------------------------------------------------------------------
-#include <NewPing.h>
-#define SONAR_NUM     15 // Number of sensors.
-#define MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
-#define PING_INTERVAL 33 // Milliseconds between sensor pings (29ms is about the min to avoid cross-sensor echo).
-unsigned long pingTimer[SONAR_NUM]; // Holds the times when the next ping should happen for each sensor.
-unsigned int cm[SONAR_NUM];         // Where the ping distances are stored.
-uint8_t currentSensor = 0;          // Keeps track of which sensor is active.
-NewPing sonar[SONAR_NUM] = {     // Sensor object array.
-  NewPing(41, 42, MAX_DISTANCE), // Each sensor's trigger pin, echo pin, and max distance to ping.
-  NewPing(43, 44, MAX_DISTANCE),
-  NewPing(45, 20, MAX_DISTANCE),
-  NewPing(21, 22, MAX_DISTANCE),
-  NewPing(23, 24, MAX_DISTANCE),
-  NewPing(25, 26, MAX_DISTANCE),
-  NewPing(27, 28, MAX_DISTANCE),
-  NewPing(29, 30, MAX_DISTANCE),
-  NewPing(31, 32, MAX_DISTANCE),
-  NewPing(34, 33, MAX_DISTANCE),
-  NewPing(35, 36, MAX_DISTANCE),
-  NewPing(37, 38, MAX_DISTANCE),
-  NewPing(39, 40, MAX_DISTANCE),
-  NewPing(50, 51, MAX_DISTANCE),
-  NewPing(52, 53, MAX_DISTANCE)
-};
-void setup() {
-  Serial.begin(115200);
-  pingTimer[0] = millis() + 75;           // First ping starts at 75ms, gives time for the Arduino to chill before starting.
-  for (uint8_t i = 1; i < SONAR_NUM; i++) // Set the starting time for each sensor.
-    pingTimer[i] = pingTimer[i - 1] + PING_INTERVAL;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>CSS Template</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
 }
-void loop() {
-  for (uint8_t i = 0; i < SONAR_NUM; i++) { // Loop through all the sensors.
-    if (millis() >= pingTimer[i]) {         // Is it this sensor's time to ping?
-      pingTimer[i] += PING_INTERVAL * SONAR_NUM;  // Set next time this sensor will be pinged.
-      if (i == 0 && currentSensor == SONAR_NUM - 1) oneSensorCycle(); // Sensor ping cycle complete, do something with the results.
-      sonar[currentSensor].timer_stop();          // Make sure previous timer is canceled before starting a new ping (insurance).
-      currentSensor = i;                          // Sensor being accessed.
-      cm[currentSensor] = 0;                      // Make distance zero in case there's no ping echo for this sensor.
-      sonar[currentSensor].ping_timer(echoCheck); // Do the ping (processing continues, interrupt will call echoCheck to look for echo).
-    }
-  }
-  // Other code that *DOESN'T* analyze ping results can go here.
+
+body {
+  background: #5AB507;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
 }
-void echoCheck() { // If ping received, set the sensor distance to array.
-  if (sonar[currentSensor].check_timer())
-    cm[currentSensor] = sonar[currentSensor].ping_result / US_ROUNDTRIP_CM;
+   h1 {
+    color: #FFD700;
+    text-align: center;
+   }
+   h2 {
+    color: #FFA500;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 5px;
+   }
+   ul, ol {
+    background: #4C9A2A;
+    padding: 25px;
+    border-radius: 8px;
+   }
+   li {
+    margin-bottom: 10px;
+   }
+
+/* Style the side navigation */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
 }
-void oneSensorCycle() { // Sensor ping cycle complete, do something with the results.
-  // The following code would be replaced with your code that does something with the ping results.
-  for (uint8_t i = 0; i < SONAR_NUM; i++) {
-    Serial.print(i);
-    Serial.print("=");
-    Serial.print(cm[i]);
-    Serial.print("cm ");
-  }
-  Serial.println();
+
+
+/* Side navigation links */
+.sidenav a {
+  color: white;
+  padding: 16px;
+  text-decoration: RED;
+  display: block;
 }
+
+/* Change color on hover */
+.sidenav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the content */
+.content {
+  margin-left: 200px;
+  padding-left: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a href="HOME.html">HOME</a>
+  <a href="MI CV HTML.HTML">MI CV HTML</a>
+  <a href="MI CV CSS.HTML">MI CV HTML</a>
+</div>
+
+<div class="content">
+  <h1>Francisco José Martí Rodilla</h1>
+  <h2>Datos personales</h2>
+  <ul>
+   <li>Direccion: C/Pla de arguines, nº2, 3º, 10-B</li>
+   <li>Telefono: 676419846</li>
+   <li>Correo electronico: FranJose@hotmail.com</li>
+  </ul>
+  <h2>Datos de interes</h2>
+  <ul>
+   <li>Carnet de conducir B</li>
+   <li>Veiculo propio</li>
+  </ul>
+  <h2>Experiencia Laboral</h2>
+  <ol>
+   <li>Operador de proceso 2008-Actualidad</li>
+   <li>Mantenimiento electrico 2007-2008</li>
+   <li>Operador bobinero 2002-2006</li>
+   <li>Reponedor en gran superficie 2001-2001</li>
+   <li>Limpieza industrial 2000-2000</li>
+   <li>Instalador electrico 1999-1999</li>
+  </ol>
+  <h2>Estudios</h2>
+  <ol>
+   <li>ASIR (Actualmente en curso)</li>
+   <li>Mantenimiento industrial G.S. 2007</li>
+   <li>Automacion G.M 2003</li>
+   <li>EGB</li>
+  </ol>
+  <h2>Cursos</h2>
+  <ol>
+   <li>Carretillero</li>
+   <li>Prevencion de riesgos lavorales</li>
+   <li>Instalaciones en media y baja tension</li>
+   <li>Primeros axilios</li>
+  </ol>
+</div>
+
+</body>
+</html>
