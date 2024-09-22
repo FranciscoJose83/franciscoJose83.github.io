@@ -1,5 +1,4 @@
 # fjmr.github.io
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>CSS Template</title>
