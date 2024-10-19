@@ -25,6 +25,14 @@
             background-color: #111;
             overflow-x: hidden;
         }
+        /* Título en la navegación lateral */
+        .navelat h3 {
+            color: white;
+            text-align: center;
+            padding: 16px 0;
+            margin: 0;
+            background-color: #111;
+        }
         /* Enlaces navegación lateral */
         .navelat a {
             color: white;
@@ -41,7 +49,7 @@
         .contenido {
             margin-left: 200px;
             padding-left: 20px;
-            padding-bottom: 60px;
+            padding-bottom: 60px; /* Asegura espacio para el pie de página */
         }
         /* Pie de página */
         .fin {
@@ -52,17 +60,14 @@
             text-align: center;
             position: fixed;
             bottom: 0;
-            width: calc(100% - 200px);
+            width: calc(100% - 200px); /* Ajusta el ancho para dejar espacio para la navegación lateral */
             padding: 10px 0;
         }
     </style>
 </head>
 <body>
-    <div class="w3-container">
-       <h3 class="w3-padding-64"><b>FJMR</b></h3>
-    </div>
     <div class="navelat">
-        <h2><b>FJMR</b></h2>
+        <h3><b>FJMR</b></h3>
         <a href="index.html">Inicio</a>
         <a href="Q2/index.html">Practica Q2</a>
         <a href="Iaw/index.php">Practica Q3</a>
